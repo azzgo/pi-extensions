@@ -13,6 +13,7 @@ import { CancellableLoader, Container, Spacer, matchesKey, visibleWidth, truncat
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { homedir } from "node:os";
+import { setupAgentTimer } from "./agent-timer.js";
 
 // =============================================================================
 // Types
@@ -1066,6 +1067,8 @@ class UsageComponent {
 // =============================================================================
 
 export default function (pi: ExtensionAPI) {
+	setupAgentTimer(pi);
+
 	pi.registerCommand("usage", {
 		description: "Show usage statistics dashboard",
 		handler: async (_args: string, ctx: ExtensionCommandContext) => {
